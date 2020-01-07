@@ -17,8 +17,10 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
 
         title = selectedImage
+        let share = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
+        let camera_ = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(camera))
+        navigationItem.rightBarButtonItems = [share, camera_]
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Camera", style: .plain, target: self, action: #selector(camera))
         navigationItem.largeTitleDisplayMode = .never
 
         if let imageToLoad = selectedImage {
@@ -49,7 +51,7 @@ class DetailViewController: UIViewController {
     }
     
     @objc func camera() {
-        
+        print("NavigationItem camera has been touch!!!!")
     }
 }
 
