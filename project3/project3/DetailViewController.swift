@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class DetailViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
@@ -16,6 +17,8 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
 
         title = selectedImage
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Camera", style: .plain, target: self, action: #selector(camera))
         navigationItem.largeTitleDisplayMode = .never
 
         if let imageToLoad = selectedImage {
@@ -31,6 +34,22 @@ class DetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.hidesBarsOnTap = false
+    }
+    
+    @objc func shareTapped() {
+        let vc = UIActivityViewController(activityItems: [imageView.image!], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+//        if let vc = SLComposeViewController(forServiceType: SLServiceTypeFacebook){
+//          vc.setInitialText("Look at this great picture!")
+//          vc.add(imageView.image!)
+//          vc.add(URL(string: "http://www.photolib.noaa.gov/nssl"))
+//        present(vc, animated: true)
+//    }
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func camera() {
+        
     }
 }
 
